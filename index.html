@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVN Profile | Giới thiệu bản thân</title>
+    <!-- Tailwind CSS cho layout và styling nhanh -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome cho Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        primary: '#8b5cf6', // Violet
+                        secondary: '#d946ef', // Fuchsia
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism CSS */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #8b5cf6, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Background Blob Animation */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: moveBlob 10s infinite alternate;
+        }
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, -50px) scale(1.1); }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans relative">
+
+    <!-- Background Ambient Glow -->
+    <div class="blob bg-violet-600 w-96 h-96 rounded-full top-0 left-[-10%]"></div>
+    <div class="blob bg-fuchsia-600 w-96 h-96 rounded-full top-[20%] right-[-10%]" style="animation-delay: -5s;"></div>
+    <div class="blob bg-blue-600 w-80 h-80 rounded-full bottom-[-10%] left-[20%]"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center glass-card border-x-0 border-t-0 rounded-b-2xl">
+            <a href="#" class="text-2xl font-bold tracking-tighter text-white">
+                Port<span class="text-gradient">folio.</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-primary transition">Trang chủ</a>
+                <a href="#pinned" class="hover:text-primary transition">Trạng thái</a>
+                <a href="#about" class="hover:text-primary transition">Về tôi</a>
+                <a href="#smm" class="hover:text-primary transition">Kỹ năng SMM</a>
+            </div>
+            <a href="#contact" class="hidden md:block px-5 py-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full font-medium hover:shadow-lg hover:shadow-violet-500/30 transition">
+                Liên hệ ngay
+            </a>
+            <button class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <span class="px-3 py-1 text-xs font-medium bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20 mb-4 inline-block">
+                    Chào mừng đến với hồ sơ của tôi 🚀
+                </span>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4">
+                    Xin chào, tôi là <br>
+                    <span class="text-gradient">Tòng Văn Ngọc</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-medium text-gray-300 mb-6 h-10">
+                    Tôi là một <span id="typing-text" class="text-white border-r-2 border-primary pr-1"></span>
+                </h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-lg">
+                    Đam mê sáng tạo nội dung, nắm bắt xu hướng nhanh nhạy. Tôi kết hợp kiến thức học thuật và kỹ năng thực chiến để mang lại giá trị trên nền tảng mạng xã hội.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#pinned" class="px-8 py-3.5 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition">
+                        Khám phá ngay <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                    <div class="flex items-center gap-4 ml-2">
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-primary hover:border-primary transition text-xl">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-secondary hover:border-secondary transition text-xl">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-rose-500 hover:border-rose-500 transition text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative w-72 h-72 md:w-[450px] md:h-[450px] animate-float">
+                    <!-- Ảnh đại diện -->
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-600 blur-2xl opacity-50"></div>
+                    <img src="https://ibb.co/p6nNQQsz?auto=format&fit=crop&q=80&w=600" 
+                         alt="Avatar" 
+                         class="relative w-full h-full object-cover rounded-[2rem] border-2 border-white/10 rotate-3 hover:rotate-0 transition duration-500 z-10 shadow-2xl">
+                    
+                    <!-- Floating badges -->
+                    <div class="absolute -bottom-6 -left-6 glass-card px-4 py-3 rounded-2xl z-20 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                            <i class="fas fa-chart-line text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Chuyên môn</p>
+                            <p class="font-bold text-sm">Marketing</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 glass-card px-4 py-3 rounded-2xl z-20 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">
+                            <i class="fas fa-heart text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Sáng tạo</p>
+                            <p class="font-bold text-sm">Content</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pinned Status Section -->
+    <section id="pinned" class="py-20 relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-sm font-semibold text-primary tracking-widest uppercase mb-2">Highlights</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">📌 Đang ghim</h3>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Trạng thái hiện tại của tôi. Đang nỗ lực học tập và phát triển sự nghiệp trong ngành truyền thông đa phương tiện.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Location Pin -->
+                <div class="glass-card p-8 rounded-3xl reveal flex flex-col items-center text-center relative overflow-hidden group">
+                    <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-3xl mb-6 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">Đang học tại</h4>
+                    <h3 class="text-2xl font-bold text-white mb-2">Đại học Nông Lâm TN</h3>
+                    <p class="text-gray-400 text-sm">TP Thái >
+                </div>
+
+                <!-- Major Pin -->
+                <div class="glass-card p-8 rounded-3xl reveal flex flex-col items-center text-center relative overflow-hidden group" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-3xl mb-6 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">Chuyên ngành</h4>
+                    <h3 class="text-2xl font-bold text-white mb-2">Truyền thông / Marketing</h3>
+                    <p class="text-gray-400 text-sm">Sinh viên năm [2]</p>
+                </div>
+
+                <!-- Job Pin -->
+                <div class="glass-card p-8 rounded-3xl reveal flex flex-col items-center text-center relative overflow-hidden group" style="transition-delay: 200ms;">
+                    <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-rose-500 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-3xl mb-6 shadow-[0_0_30px_rgba(244,63,94,0.2)]">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">Công việc hiện tại</h4>
+                    <h3 class="text-2xl font-bold text-white mb-2">Chuyên viên, Dịch Vụ MMO, SMM</h3>
+                    <p class="text-gray-400 text-sm">Social Media Marketing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SMM Skills Section -->
+    <section id="smm" class="py-20 relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/2 reveal">
+                    <h2 class="text-sm font-semibold text-secondary tracking-widest uppercase mb-2">Expertise</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6">Social Media Marketing <br>là thế mạnh của tôi.</h3>
+                    <p class="text-gray-400 mb-8 text-lg">
+                        Biến người theo dõi thành khách hàng trung thành. Tôi chuyên xây dựng chiến lược, sáng tạo nội dung viral và tối ưu hóa các chiến dịch quảng cáo trên các nền tảng xã hội.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium"><i class="fas fa-pen-nib text-violet-400 mr-2"></i> Content Creation (Tiktok, Reels)</span>
+                                <span class="text-violet-400">90%</span>
+                            </div>
+                            <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 w-[90%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium"><i class="fas fa-bullhorn text-blue-400 mr-2"></i> Quản trị Fanpage & Community</span>
+                                <span class="text-blue-400">85%</span>
+                            </div>
+                            <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 w-[85%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium"><i class="fas fa-chart-pie text-rose-400 mr-2"></i> Chạy Ads & Phân tích Insight</span>
+                                <span class="text-rose-400">75%</span>
+                            </div>
+                            <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-rose-500 to-orange-500 w-[75%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 grid grid-cols-2 gap-4 reveal">
+                    <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center text-center aspect-square mt-8">
+                        <i class="fab fa-tiktok text-4xl text-white mb-4"></i>
+                        <h4 class="font-bold text-lg">Tiktok Master</h4>
+                        <p class="text-xs text-gray-400 mt-2">Bắt trend, Edit video CapCut</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center text-center aspect-square">
+                        <i class="fab fa-facebook text-4xl text-blue-500 mb-4"></i>
+                        <h4 class="font-bold text-lg">Facebook Ads</h4>
+                        <p class="text-xs text-gray-400 mt-2">Tối ưu chiến dịch, Target</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center text-center aspect-square">
+                        <i class="fas fa-camera-retro text-4xl text-rose-400 mb-4"></i>
+                        <h4 class="font-bold text-lg">Hình ảnh</h4>
+                        <p class="text-xs text-gray-400 mt-2">Canva, PTS cơ bản</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center text-center aspect-square -mt-8">
+                        <i class="fas fa-lightbulb text-4xl text-yellow-400 mb-4"></i>
+                        <h4 class="font-bold text-lg">Strategy</h4>
+                        <p class="text-xs text-gray-400 mt-2">Lập kế hoạch nội dung</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="pt-20 pb-10 relative z-10 border-t border-white/10 bg-black/50 mt-20">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Sẵn sàng hợp tác?</h2>
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">Đang tìm kiếm một sinh viên năng động, có kiến thức chuyên môn vững vàng để phụ trách mảng SMM cho dự án của bạn? Hãy kết nối với tôi.</p>
+            
+            </a>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-white/10 text-sm text-gray-500">
+                <p>&copy; 2026 Bản quyền thuộc về Tòng Văn Ngọc.</p>
+                <div class="flex space-x-6">
+                    <a href="fb.com/vnqocyeuem" class="hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                    <a href="https://www.instagram.com/vnqoc_yeuem" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Typing Effect
+        const textArray = ["Sinh viên.", "Content Creator.", "Social Media Manager.", "Marketer."];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 2000;
+
+        function type() {
+            const currentText = textArray[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? erasingDelay : typingDelay;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = newTextDelay;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if(textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+
+        // Navbar blur on scroll
+        window.addEventListener("scroll", function() {
+            const navbar = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("bg-black/50");
+                navbar.classList.add("backdrop-blur-md");
+            } else {
+                navbar.classList.remove("bg-black/50");
+                navbar.classList.remove("backdrop-blur-md");
+            }
+        });
+    </script>
+</body>
+</html>
